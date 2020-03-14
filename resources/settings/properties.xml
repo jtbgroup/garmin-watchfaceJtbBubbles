@@ -1,0 +1,17 @@
+<properties> 
+	<property id="PROP_HOUR_MODE" type="number">0</property>
+	<property id="PROP_DATE_FORMAT" type="number">0</property>
+	<property id="PROP_COLOR_BACKGROUND" type="number">3</property> 
+	<property id="PROP_COLOR_HOUR" type="number">4</property> 
+	<property id="PROP_COLOR_MINUTE" type="number">7</property> 
+	<property id="PROP_COLOR_SECOND" type="number">8</property> 
+	<property id="PROP_DISTANCE_HOUR" type="number">40</property> 
+	<property id="PROP_DISTANCE_MINUTE" type="number">80</property> 
+	<property id="PROP_DISTANCE_SECOND" type="number">110</property> 
+	<property id="PROP_ORBIT_HOUR" type="boolean">true</property> 
+	<property id="PROP_ORBIT_MINUTE" type="boolean">true</property> 
+	<property id="PROP_ORBIT_SECOND" type="boolean">true</property> 
+	<property id="PROP_ORBIT_WIDTH_HOUR" type="number">3</property> 
+	<property id="PROP_ORBIT_WIDTH_MINUTE" type="number">2</property> 
+	<property id="PROP_ORBIT_WIDTH_SECOND" type="number">1</property> 
+</properties> 

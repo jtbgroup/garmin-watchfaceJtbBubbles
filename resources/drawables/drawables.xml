@@ -1,0 +1,6 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="iconBT" filename="icon_bt_16.png" />
+    <bitmap id="iconBell" filename="icon_bell_16.png" />
+    <bitmap id="iconEnveloppe" filename="icon_enveloppe_16.png" />
+</drawables>

@@ -1,0 +1,160 @@
+<settings>
+
+	<!-- <setting propertyKey="@Properties.appVersion" title="@Strings.AppVersionTitle"> 
+		<settingConfig type="alphaNumeric" readonly="true" /> </setting> <setting 
+		propertyKey="@Properties.myString" title="@Strings.MyStringTitle" prompt="@Strings.MyStringPrompt"> 
+		<settingConfig type="list"> <listEntry value="0">@Strings.HelloWorld</listEntry> 
+		<listEntry value="1">@Strings.Ackbar</listEntry> <listEntry value="2">@Strings.Garmin</listEntry> 
+		</settingConfig> </setting> <setting propertyKey="@Properties.myNumber" title="@Strings.MyNumberTitle" 
+		prompt="@Strings.MyNumberPrompt"> <settingConfig type="numeric" errorMessage="@Strings.MyNumberError" 
+		/> </setting> <setting propertyKey="@Properties.screenSleep" title="@Strings.ScreenSleepTitle"> 
+		<settingConfig type="boolean" /> </setting> <setting propertyKey="@Properties.username" 
+		title="@Strings.UsernameTitle"> <settingConfig type="alphaNumeric" required="true" 
+		/> </setting> -->
+
+	<!-- setting propertyKey="@Properties.COLOR_MODE"
+		title="@Strings.propertyColorMode">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.standard</listEntry>
+			<listEntry value="1">@Strings.disco</listEntry>
+			<listEntry value="2">@Strings.lucy</listEntry>
+		</settingConfig>
+	</setting -->
+
+	<setting propertyKey="@Properties.PROP_COLOR_BACKGROUND"
+		title="@Strings.propertyColorBackground">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+
+	<setting propertyKey="@Properties.PROP_COLOR_HOUR"
+		title="@Strings.propertyColorHour">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+
+	<setting propertyKey="@Properties.PROP_COLOR_MINUTE"
+		title="@Strings.propertyColorMinute">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_COLOR_SECOND"
+		title="@Strings.propertyColorSecond">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_DATE_FORMAT"
+		title="@Strings.propertyDateFormat">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.dayNum_monthNum</listEntry>
+			<listEntry value="1">@Strings.monthNum_dayNum_</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_HOUR_MODE"
+		title="@Strings.propertyHourMode">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.hourMode_12</listEntry>
+			<listEntry value="1">@Strings.hourMode_24</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_DISTANCE_HOUR"
+		title="@Strings.propertyDistanceHour">
+		<settingConfig type="numeric" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_DISTANCE_MINUTE"
+		title="@Strings.propertyDistanceMinute">
+		<settingConfig type="numeric" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_DISTANCE_SECOND"
+		title="@Strings.propertyDistanceSecond">
+		<settingConfig type="numeric" />
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_ORBIT_HOUR"
+		title="@Strings.propertyOrbitHour">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_ORBIT_MINUTE"
+		title="@Strings.propertyOrbitMinute">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_ORBIT_SECOND"
+		title="@Strings.propertyOrbitSecond">
+		<settingConfig type="boolean" />
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_HOUR"
+		title="@Strings.propertyOrbitWidthHour">
+		<settingConfig type="numeric" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_MINUTE"
+		title="@Strings.propertyOrbitWidthMinute">
+		<settingConfig type="numeric" />
+	</setting>
+	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_SECOND"
+		title="@Strings.propertyOrbitWidthSecond">
+		<settingConfig type="numeric" />
+	</setting>
+
+
+</settings>

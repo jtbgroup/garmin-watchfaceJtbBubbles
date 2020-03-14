@@ -1,0 +1,47 @@
+<strings>
+
+    <string id="AppName_DEV">JtB Face Bubble - BETA</string>
+    <string id="AppName_PROD">JtB Face Bubble</string>
+
+    <string id="propertyHourMode">Hour Mode</string>
+    <string id="hourMode_12">12 Hour</string>
+    <string id="hourMode_24">24 Hour</string>
+    
+      
+    <string id="propertyColorBackground">Background color</string>
+   	<string id="propertyColorHour">Color for Hours</string>
+   	<string id="propertyColorMinute">Color for Minutes</string>
+    <string id="propertyColorSecond">Color for Seconds</string>
+	
+    <string id="white">White</string>
+    <string id="light_gray">Gray</string>
+    <string id="dark_gray">Dark Gray</string>
+    <string id="black">Black</string>
+    <string id="red">Red</string>
+    <string id="dark_red">Dark Red</string>
+    <string id="orange">Orange</string>
+    <string id="yellow">Yellow</string>
+	<string id="green">Green</string>
+	<string id="dark_green">Dark Green</string>
+	<string id="blue">Blue</string>
+	<string id="dark_blue">Dark Blue</string>
+	<string id="purple">Purple</string>
+	<string id="pink">Pink</string>
+	
+	<string id="propertyDistanceHour">Distance Hour</string>
+	<string id="propertyDistanceMinute">Distance Minute</string>
+	<string id="propertyDistanceSecond">Distance Second</string>
+
+	<string id="propertyOrbitHour">Show Hour Orbit</string>
+	<string id="propertyOrbitMinute">Show Minute Orbit</string>
+	<string id="propertyOrbitSecond">Show Second Orbit</string>
+	
+	<string id="propertyOrbitWidthHour">Orbit width Hour</string>
+	<string id="propertyOrbitWidthMinute">Orbit width Minute</string>
+	<string id="propertyOrbitWidthSecond">Orbit width Second</string>
+	
+	<string id="propertyDateFormat">Date format</string>
+	<string id="dayNum_monthNum">day / month</string>
+	<string id="monthNum_dayNum_">month / day</string>
+	
+</strings>
