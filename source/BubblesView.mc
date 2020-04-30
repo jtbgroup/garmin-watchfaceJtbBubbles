@@ -3,14 +3,9 @@ using Toybox.Graphics as Gfx;
 using Toybox.System;
 using Toybox.Lang;
 using Toybox.Time.Gregorian as Calendar;
+using PropertiesHelper as Ph;
 
-class watchFaceJtbBubblesView extends Ui.WatchFace {
-
-	var COLORS = [Gfx.COLOR_WHITE, Gfx.COLOR_LT_GRAY, Gfx.COLOR_DK_GRAY, Gfx.COLOR_BLACK, Gfx.COLOR_RED, Gfx.COLOR_DK_RED, Gfx.COLOR_ORANGE, Gfx.COLOR_YELLOW, Gfx.COLOR_GREEN, Gfx.COLOR_DK_GREEN, Gfx.COLOR_BLUE, Gfx.COLOR_DK_BLUE, Gfx.COLOR_PURPLE, Gfx.COLOR_PINK];
-	var HOUR_MODE_12=0;
-	var HOUR_MODE_24=1;
-	var DATE_FORMAT_DDMM=0;
-	var DATE_FORMAT_MMDD=1;
+class BubblesView extends Ui.WatchFace {
 
 	var COLOR_FOREGROUND = Gfx.COLOR_WHITE;
 	var COLOR_TRANSPARENT= Gfx.COLOR_TRANSPARENT;
@@ -30,135 +25,43 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
 	var screenWidth, screenHeight= 0;
 	var sleeping=false;
 
-	//PROPERTIES -- configurables
-	var PROP_COLOR_BACKGROUND = Gfx.COLOR_BLACK;
-
-	var PROP_DISTANCE_HOUR = 40;
-	var PROP_DISTANCE_MINUTE = 80;
-	var PROP_DISTANCE_SECOND = 110;
-
-	var PROP_COLOR_HOUR = Gfx.COLOR_RED;
-	var PROP_COLOR_MINUTE = Gfx.COLOR_BLUE;
-	var PROP_COLOR_SECOND = Gfx.COLOR_GREEN;
-	
-	var PROP_ORBIT_HOUR = true;
-	var PROP_ORBIT_MINUTE = true;
-	var PROP_ORBIT_SECOND = true;
-	
-	var PROP_ORBIT_WIDTH_HOUR = 7;
-	var PROP_ORBIT_WIDTH_MINUTE = 3;
-	var PROP_ORBIT_WIDTH_SECOND = 1;
-	
-	var PROP_HOUR_MODE=HOUR_MODE_12;
-	var PROP_DATE_FORMAT=DATE_FORMAT_DDMM;
-	
-    function onShow() {
-    }
-    
     function onLayout(dc){
     	iconEnveloppe = Ui.loadResource( Rez.Drawables.iconEnveloppe );
     	iconBell = Ui.loadResource( Rez.Drawables.iconBell );
     	iconBT = Ui.loadResource( Rez.Drawables.iconBT );
-    	loadProperties();
+	    setLayout( Rez.Layouts.MainLayout( dc ) );
     }
 
-  function loadProperties(){
-		try{
-			PROP_HOUR_MODE = Application.Properties.getValue("PROP_HOUR_MODE");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_DATE_FORMAT = Application.Properties.getValue("PROP_DATE_FORMAT");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_COLOR_BACKGROUND = COLORS[Application.Properties.getValue("PROP_COLOR_BACKGROUND")];
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_COLOR_HOUR = COLORS[Application.Properties.getValue("PROP_COLOR_HOUR")];
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_COLOR_MINUTE = COLORS[Application.Properties.getValue("PROP_COLOR_MINUTE")];
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_COLOR_SECOND = COLORS[Application.Properties.getValue("PROP_COLOR_SECOND")];
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		
-		try{
-			PROP_ORBIT_HOUR = Application.Properties.getValue("PROP_ORBIT_HOUR");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_ORBIT_MINUTE = Application.Properties.getValue("PROP_ORBIT_MINUTE");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		try{
-			PROP_ORBIT_SECOND = Application.Properties.getValue("PROP_ORBIT_SECOND");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_DISTANCE_HOUR = Application.Properties.getValue("PROP_DISTANCE_HOUR");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_DISTANCE_MINUTE = Application.Properties.getValue("PROP_DISTANCE_MINUTE");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_DISTANCE_SECOND = Application.Properties.getValue("PROP_DISTANCE_SECOND");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		
-		try{
-			PROP_ORBIT_WIDTH_HOUR = Application.Properties.getValue("PROP_ORBIT_WIDTH_HOUR");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		try{
-			PROP_ORBIT_WIDTH_MINUTE = Application.Properties.getValue("PROP_ORBIT_WIDTH_MINUTE");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
-		try{
-			PROP_ORBIT_WIDTH_SECOND = Application.Properties.getValue("PROP_ORBIT_WIDTH_SECOND");
-		} catch (e instanceof InvalidKeyException) {
-   			System.println(e.getErrorMessage());
-		}
+
+	function onUpdate(dc){
+		onUpdate2(dc);
+	}
 	
-    }
-    
-    // Update the view
-    function onUpdate(dc) {
-    	MIN_ANGLE = 6;
+     function onUpdateWithLayout(dc) {
+     	View.onUpdate(dc);
+        
+        
+        MIN_ANGLE = 6;
     	SEC_ANGLE = 6;
 		
-		if(PROP_HOUR_MODE == HOUR_MODE_24){
+		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_24){
+    		HOUR_ANGLE = 15;
+    	}else{
+    		HOUR_ANGLE = 30;
+    	}	
+
+    	screenHeight = dc.getHeight();
+    	screenWidth = dc.getWidth();
+    		
+    	displayTime(dc);
+     }
+     
+    // Update the view
+    function onUpdate2(dc) {
+		MIN_ANGLE = 6;
+    	SEC_ANGLE = 6;
+		
+		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_24){
     		HOUR_ANGLE = 15;
     	}else{
     		HOUR_ANGLE = 30;
@@ -167,7 +70,7 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
     	screenHeight = dc.getHeight();
     	screenWidth = dc.getWidth();
     	
-    	dc.setColor(COLOR_FOREGROUND, PROP_COLOR_BACKGROUND);
+    	dc.setColor(COLOR_FOREGROUND, Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
     	dc.clear();
     	
     	displayAlarm(dc);    	
@@ -202,9 +105,9 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
    		var info = Calendar.info(Time.now(), Time.FORMAT_SHORT);
    		
    		var data = [info.day.format("%02d"), info.month.format("%02d")];
-   		if(PROP_DATE_FORMAT == DATE_FORMAT_DDMM){
+   		if(Ph.getValue(Ph.PROP_DATE_FORMAT) == Ph.OPTION_DATE_FORMAT_DDMM){
    			data = [info.day.format("%02d"), info.month.format("%02d")];
-   		}else if(PROP_DATE_FORMAT == DATE_FORMAT_MMDD){
+   		}else if(Ph.getValue(Ph.PROP_DATE_FORMAT) == Ph.OPTION_DATE_FORMAT_DDMM){
    			data = [info.month.format("%02d"), info.day.format("%02d")];
    		}
    		
@@ -226,7 +129,7 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
 		displayMinutes(dc, clockTime.min);    
 				
 		var hour = clockTime.hour;
-		if(PROP_HOUR_MODE == HOUR_MODE_12 && hour >= 12){
+		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_12 && hour >= 12){
 			hour = hour - 12;
 		}
 		displayHour(dc, hour); 
@@ -234,20 +137,20 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
     
     
     function displaySeconds(dc, second){
-    	var coord= getXY(second*SEC_ANGLE, PROP_DISTANCE_SECOND);
+    	var coord= getXY(second*SEC_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_SECOND));
     	var coordX = coord[0];
     	var coordY = coord[1];
     	
     	//draw orbit
-		if(PROP_ORBIT_SECOND){
-			dc.setColor(PROP_COLOR_SECOND, PROP_COLOR_BACKGROUND); 
-			dc.setPenWidth(PROP_ORBIT_WIDTH_SECOND);
-			dc.drawCircle(screenWidth/2, screenHeight/2, PROP_DISTANCE_SECOND);
+		if(Ph.getValue(Ph.PROP_ORBIT_SECOND)){
+			dc.setColor(Ph.getValue(Ph.PROP_COLOR_SECOND), Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
+			dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_SECOND));
+			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_SECOND));
 			dc.setPenWidth(1);
 		}
 		
 		//draw bubbles
-		dc.setColor(PROP_COLOR_SECOND, PROP_COLOR_BACKGROUND);
+		dc.setColor(Ph.getValue(Ph.PROP_COLOR_SECOND), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
 		dc.fillCircle(coordX, coordY, SEC_RAD);
 //		dc.setColor(COLOR_BACKGROUND, Gfx.COLOR_TRANSPARENT); 
 //		var fontH = dc.getFontHeight(FONT_HOUR);
@@ -255,22 +158,22 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
     }  
     
     function displayHour(dc, hour){
-		var coord= getXY(hour*HOUR_ANGLE, PROP_DISTANCE_HOUR);
+		var coord= getXY(hour*HOUR_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_HOUR));
     	var coordX = coord[0];
     	var coordY = coord[1];
 		
 		//draw orbit
-		if(PROP_ORBIT_HOUR){
-			dc.setColor(PROP_COLOR_HOUR, PROP_COLOR_BACKGROUND); 
-			dc.setPenWidth(PROP_ORBIT_WIDTH_HOUR);
-			dc.drawCircle(screenWidth/2, screenHeight/2, PROP_DISTANCE_HOUR);
+		if(Ph.getValue(Ph.PROP_ORBIT_HOUR)){
+			dc.setColor(Ph.getValue(Ph.PROP_COLOR_HOUR), Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
+			dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_HOUR));
+			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_HOUR));
 			dc.setPenWidth(1);
 		}
 		
 		//draw bubbles
-		dc.setColor(PROP_COLOR_HOUR, PROP_COLOR_BACKGROUND);
+		dc.setColor( Ph.getValue(Ph.PROP_COLOR_HOUR) , Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
 		dc.fillCircle(coordX, coordY, HOUR_RAD);
-		dc.setColor(PROP_COLOR_BACKGROUND, Gfx.COLOR_TRANSPARENT); 
+		dc.setColor(Ph.getValue(Ph.PROP_COLOR_BACKGROUND), Gfx.COLOR_TRANSPARENT); 
 		var fontH = dc.getFontHeight(FONT_HOUR);
 		dc.drawText(coordX, coordY-fontH/2, FONT_HOUR, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
     }
@@ -278,23 +181,23 @@ class watchFaceJtbBubblesView extends Ui.WatchFace {
     
     function displayMinutes(dc, minutes){
     	//6 degrees per minute
-		var coord= getXY(minutes*MIN_ANGLE, PROP_DISTANCE_MINUTE);
+		var coord= getXY(minutes*MIN_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_MINUTE));
     	
     	var coordX = coord[0];
     	var coordY = coord[1];
     	
     	//draw orbit
-    	if(PROP_ORBIT_MINUTE){
-    		dc.setColor(PROP_COLOR_MINUTE, PROP_COLOR_BACKGROUND);
-    		dc.setPenWidth(PROP_ORBIT_WIDTH_MINUTE);
-			dc.drawCircle(screenWidth/2, screenHeight/2, PROP_DISTANCE_MINUTE);
+    	if(Ph.getValue(Ph.PROP_ORBIT_MINUTE)){
+    		dc.setColor(Ph.getValue(Ph.PROP_COLOR_MINUTE), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
+    		dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_MINUTE));
+			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_MINUTE));
 			dc.setPenWidth(1);
 		}
 		
 		//draw bubble
-		dc.setColor(PROP_COLOR_MINUTE, PROP_COLOR_BACKGROUND);
+		dc.setColor(Ph.getValue(Ph.PROP_COLOR_MINUTE), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
 		dc.fillCircle(coordX, coordY, MIN_RAD);
-		dc.setColor(PROP_COLOR_BACKGROUND, Gfx.COLOR_TRANSPARENT); 
+		dc.setColor(Ph.getValue(Ph.PROP_COLOR_BACKGROUND), Gfx.COLOR_TRANSPARENT); 
 		var fontH = dc.getFontHeight(FONT_MIN);
 		dc.drawText(coordX, coordY-fontH/2, FONT_MIN, minutes.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
     }
