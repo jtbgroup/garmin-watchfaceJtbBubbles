@@ -329,20 +329,20 @@
 		title="@Strings.propertyFontSizeClockHour">
 		<settingConfig type="list">
 			<listEntry value="0">@Strings.xtiny</listEntry>
-			<listEntry value="1">@Strings.tiny</listEntry>
-			<listEntry value="2">@Strings.small</listEntry>
-			<listEntry value="3">@Strings.medium</listEntry>
-			<listEntry value="4">@Strings.large</listEntry>
+			<listEntry value="4">@Strings.tiny</listEntry>
+			<listEntry value="5">@Strings.small</listEntry>
+			<listEntry value="6">@Strings.medium</listEntry>
+			<listEntry value="7">@Strings.large</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.PROP_FONT_SIZE_CLOCK_MINUTE"
 		title="@Strings.propertyFontSizeClockMinute">
 		<settingConfig type="list">
 			<listEntry value="0">@Strings.xtiny</listEntry>
-			<listEntry value="1">@Strings.tiny</listEntry>
-			<listEntry value="2">@Strings.small</listEntry>
-			<listEntry value="3">@Strings.medium</listEntry>
-			<listEntry value="4">@Strings.large</listEntry>
+			<listEntry value="4">@Strings.tiny</listEntry>
+			<listEntry value="5">@Strings.small</listEntry>
+			<listEntry value="6">@Strings.medium</listEntry>
+			<listEntry value="7">@Strings.large</listEntry>
 		</settingConfig>
 	</setting>
 	
