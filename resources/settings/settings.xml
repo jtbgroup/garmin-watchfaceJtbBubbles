@@ -323,7 +323,6 @@
 			<listEntry value="0">@Strings.xtiny</listEntry>
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
-			<listEntry value="3">@Strings.medium</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.PROP_FONT_SIZE_CLOCK_HOUR"
@@ -333,6 +332,7 @@
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
 			<listEntry value="3">@Strings.medium</listEntry>
+			<listEntry value="4">@Strings.large</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.PROP_FONT_SIZE_CLOCK_MINUTE"
@@ -342,6 +342,7 @@
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
 			<listEntry value="3">@Strings.medium</listEntry>
+			<listEntry value="4">@Strings.large</listEntry>
 		</settingConfig>
 	</setting>
 	

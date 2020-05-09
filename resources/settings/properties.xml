@@ -13,8 +13,8 @@
 	<property id="PROP_HOUR_MODE" type="number">0</property>
 	<property id="PROP_DATE_FORMAT" type="number">0</property>
 	<property id="PROP_FONT_SIZE_DATE" type="number">0</property> 
-	<property id="PROP_FONT_SIZE_CLOCK_HOUR" type="number">3</property> 
-	<property id="PROP_FONT_SIZE_CLOCK_MINUTE" type="number">1</property> 
+	<property id="PROP_FONT_SIZE_CLOCK_HOUR" type="number">4</property> 
+	<property id="PROP_FONT_SIZE_CLOCK_MINUTE" type="number">3</property> 
 	<property id="PROP_SHOW_BATTERY" type="boolean">true</property> 
 	<property id="PROP_SHOW_NOTIFICATION" type="boolean">true</property>
 	<property id="PROP_SHOW_ALARM" type="boolean">true</property>
