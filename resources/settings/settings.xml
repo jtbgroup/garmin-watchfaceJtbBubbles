@@ -101,6 +101,46 @@
 		</settingConfig>
 	</setting>
 	
+	<setting propertyKey="@Properties.PROP_COLOR_DATE"
+		title="@Strings.propertyColorDate">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_COLOR_BUBBLE_BORDER"
+		title="@Strings.propertyColorBubbleBorder">
+		<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+		</settingConfig>
+	</setting>
+	
 	<setting propertyKey="@Properties.PROP_ICON_COLOR_BLUETOOTH"
 		title="@Strings.propertyIconColorBluetooth">
 		<settingConfig type="list">
@@ -201,8 +241,33 @@
 			<listEntry value="2">@Strings.small</listEntry>
 		</settingConfig>
 	</setting>
+	
+	
+	<setting propertyKey="@Properties.PROP_SHOW_DATE"
+		title="@Strings.propertyShowDate">
+		<settingConfig type="boolean" />
+	</setting>
 
-
+	<setting propertyKey="@Properties.PROP_SHOW_BATTERY"
+		title="@Strings.propertyShowBattery">
+		<settingConfig type="boolean" />
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_SHOW_BLUETOOTH"
+		title="@Strings.propertyShowBluetooth">
+		<settingConfig type="boolean" />
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_SHOW_ALARM"
+		title="@Strings.propertyShowAlarm">
+		<settingConfig type="boolean" />
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_SHOW_NOTIFICATION"
+		title="@Strings.propertyShowNotification">
+		<settingConfig type="boolean" />
+	</setting>
+	
 
 	<setting propertyKey="@Properties.PROP_SHOW_ORBIT_HOUR"
 		title="@Strings.propertyOrbitHour">
@@ -219,28 +284,28 @@
 	
 	<setting propertyKey="@Properties.PROP_ORBIT_DISTANCE_HOUR"
 		title="@Strings.propertyOrbitDistanceHour">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="15" max="100"/>
 	</setting>
 	<setting propertyKey="@Properties.PROP_ORBIT_DISTANCE_MINUTE"
 		title="@Strings.propertyOrbitDistanceMinute">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="15" max="100" />
 	</setting>
 	<setting propertyKey="@Properties.PROP_ORBIT_DISTANCE_SECOND"
 		title="@Strings.propertyOrbitDistanceSecond">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="15" max="100"/>
 	</setting>
 	
 	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_HOUR"
 		title="@Strings.propertyOrbitWidthHour">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="1" max="3"/>
 	</setting>
 	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_MINUTE"
 		title="@Strings.propertyOrbitWidthMinute">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="1" max="3" />
 	</setting>
 	<setting propertyKey="@Properties.PROP_ORBIT_WIDTH_SECOND"
 		title="@Strings.propertyOrbitWidthSecond">
-		<settingConfig type="numeric" />
+		<settingConfig type="numeric" min="1" max="3" />
 	</setting>
 
 </settings>

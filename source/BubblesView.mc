@@ -24,10 +24,10 @@ class BubblesView extends Ui.WatchFace {
 	
 	//INSTANCE VARIBLES
 	//properties
-	hidden var colorBackground, colorHour, colorMinute, colorSecond;
+	hidden var colorBackground, colorHour, colorMinute, colorSecond, colorBubbleBorder, colorDate;
 	hidden var iconColorAlarm, iconColorBluetooth, iconColorNotification;
 	hidden var hourMode, dateFormat, orbitDistanceHour, orbitDistanceMinute, orbitDistanceSecond, orbitWidthHour, orbitWidthMinute, orbitWidthSecond; 
-	hidden var showOrbitHour, showOrbitMinute, showOrbitSecond;
+	hidden var showOrbitHour, showOrbitMinute, showOrbitSecond, showDate, showAlarm, showBattery, showNotification, showBluetooth;
 	hidden var fontIcons, fontHour, fontMinute, fontDate;
 	//coordinates
 	hidden var co_Screen_Width, co_Screen_Height;
@@ -44,18 +44,27 @@ class BubblesView extends Ui.WatchFace {
     	reloadBasics (false);
     	computeCoordinates(dc);
     	
-    	batteryComponent = new Compo.BatteryComponent({
-			:locX=>co_Screen_Width/2,
-			:locY=>co_Screen_Height - 15,
-			:bgc=>COLOR_TRANSPARENT,
-			:fgc=>COLOR_FOREGROUND,
-			:dc=>dc,
-			:font=>null,
-			:showText=>false
-		});
+    	if(showBattery){
+    		createBattery();
+    	}
+    
     }
     
-     function computeCoordinates(dc){
+    function createBattery(){
+    	if(null == batteryComponent){
+	    	batteryComponent = new Compo.BatteryComponent({
+				:locX=>co_Screen_Width/2,
+				:locY=>co_Screen_Height - 15,
+				:bgc=>COLOR_TRANSPARENT,
+				:fgc=>COLOR_FOREGROUND,
+				:dc=>dc,
+				:font=>null,
+				:showText=>false
+			});
+		}
+    }
+    
+    function computeCoordinates(dc){
     	//get screen dimensions
 		co_Screen_Width = dc.getWidth();
         co_Screen_Height = dc.getHeight();
@@ -79,12 +88,19 @@ class BubblesView extends Ui.WatchFace {
     
     
     function reloadShows(){
+    	showNotification = Utils.getPropertyValue(Cst.PROP_SHOW_NOTIFICATION);
+    	showDate = Utils.getPropertyValue(Cst.PROP_SHOW_DATE);
+    	showBattery = Utils.getPropertyValue(Cst.PROP_SHOW_BATTERY);
+    	showAlarm = Utils.getPropertyValue(Cst.PROP_SHOW_ALARM);
+    	showBluetooth = Utils.getPropertyValue(Cst.PROP_SHOW_BLUETOOTH);
+    
     	showOrbitHour = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_HOUR);
 		showOrbitMinute = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_MINUTE);
 		showOrbitSecond = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_SECOND);
     }
     
     function reloadComponents(){
+    	createBattery();
   		batteryComponent.setForegroundColor(COLOR_FOREGROUND);
     }
     
@@ -123,6 +139,8 @@ class BubblesView extends Ui.WatchFace {
 	    colorHour = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_HOUR);
     	colorMinute = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_MINUTE);
     	colorSecond = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_SECOND);
+    	colorBubbleBorder = Utils.getPropertyAsColor(Cst.PROP_COLOR_BUBBLE_BORDER);
+    	colorDate = Utils.getPropertyAsColor(Cst.PROP_COLOR_DATE);
     	
     	iconColorAlarm = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_ALARM);
     	iconColorBluetooth = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_BLUETOOTH);
@@ -135,12 +153,27 @@ class BubblesView extends Ui.WatchFace {
     	dc.setColor(COLOR_FOREGROUND, colorBackground);
     	dc.clear();
     	
-    	batteryComponent.draw(dc);
-    	displayAlarm(dc);    	
-    	displayNotifications(dc);
-		displayBT(dc);
+    	if(showBattery){
+	    	batteryComponent.draw(dc);
+    	}
+    	
+    	if(showAlarm){
+    		displayAlarm(dc);    	
+    	}
+    	
+    	if(showNotification){
+	    	displayNotifications(dc);
+    	}
+
+    	if(showBluetooth){
+			displayBT(dc);
+    	}
+    	
+    	if(showDate){
+    		displayDate(dc);
+    	}
+    	
     	displayTime(dc);
-    	displayDate(dc);
     }
     
     function displayBT(dc){
@@ -177,7 +210,7 @@ class BubblesView extends Ui.WatchFace {
    		}
    		
         var dateStr = Lang.format("$1$/$2$", data);
-        dc.setColor(COLOR_FOREGROUND, COLOR_TRANSPARENT);
+        dc.setColor(colorBubbleBorder, COLOR_TRANSPARENT);
         var fh=dc.getFontHeight(fontDate);
         dc.drawText(co_Screen_Width/2,co_Screen_Height/2-fh/2, fontDate, dateStr, Gfx.TEXT_JUSTIFY_CENTER);
     }
@@ -187,17 +220,18 @@ class BubblesView extends Ui.WatchFace {
         var clockTime = System.getClockTime();
         // var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
 		
-		if(!sleeping){
-			displaySeconds(dc, clockTime.sec);
-		}
-		
 		displayMinutes(dc, clockTime.min);    
 				
 		var hour = clockTime.hour;
-		if(hourMode == Cst.OPTION_HOUR_MODE_12 && hour >= 12){
+		if(hourMode == Cst.OPTION_HOUR_MODE_12 && hour > 12){
 			hour = hour - 12;
 		}
 		displayHour(dc, hour); 
+
+		if(!sleeping){
+			displaySeconds(dc, clockTime.sec);
+		}
+
     }
     
     
@@ -237,8 +271,8 @@ class BubblesView extends Ui.WatchFace {
 		}
 		
 		//draw bubbles
-		dc.setColor( Gfx.COLOR_LT_GRAY, COLOR_TRANSPARENT); 
-		dc.drawCircle(coordX, coordY, radiusBubbleHour+1);
+		dc.setColor( colorBubbleBorder, COLOR_TRANSPARENT); 
+		dc.fillCircle(coordX, coordY, radiusBubbleHour+1);
 		dc.setColor( colorHour, COLOR_TRANSPARENT); 
 		dc.fillCircle(coordX, coordY, radiusBubbleHour);
 		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
@@ -261,15 +295,15 @@ class BubblesView extends Ui.WatchFace {
 		}
 		
 		//draw bubbles
-		dc.setColor( Gfx.COLOR_LT_GRAY, COLOR_TRANSPARENT); 
-		dc.drawCircle(coordX, coordY, radiusBubbleMinute+1);
+		dc.setColor( colorBubbleBorder, COLOR_TRANSPARENT); 
+		dc.fillCircle(coordX, coordY, radiusBubbleMinute+1);
 		dc.setColor(colorMinute, COLOR_TRANSPARENT);
 		dc.fillCircle(coordX, coordY, radiusBubbleMinute);
 		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
 		dc.drawText(coordX, coordY, fontMinute, minutes.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
 
-	// bas angle is in degree
+	// base angle is in degree
 	function getXY (baseAngle, distance){
 		var angle = baseAngle;
     	var cosAngle = Math.cos(Math.toRadians(angle));

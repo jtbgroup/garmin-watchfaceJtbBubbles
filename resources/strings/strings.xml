@@ -10,26 +10,19 @@
     <string id="propertyColorBackground">Background color</string>
    	<string id="propertyColorClockHour">Color for Hours</string>
    	<string id="propertyColorClockMinute">Color for Minutes</string>
-    <string id="propertyColorClockSecond">Color for Seconds</string>
+    <string id="propertyColorClockSecond">Color for Seconds (sattelite)</string>
+    <string id="propertyColorDate">Color date</string>
+    <string id="propertyColorBubbleBorder">Color of the border of the bubbles</string>
     
 	<string id="propertyIconColorBluetooth">Color for the bluetooth connection icon</string>
 	<string id="propertyIconColorAlarm">Color for the alarm icon</string>
 	<string id="propertyIconColorNotification">Color for the notification icon</string>
 	
-    <string id="white">White</string>
-    <string id="light_gray">Gray</string>
-    <string id="dark_gray">Dark Gray</string>
-    <string id="black">Black</string>
-    <string id="red">Red</string>
-    <string id="dark_red">Dark Red</string>
-    <string id="orange">Orange</string>
-    <string id="yellow">Yellow</string>
-	<string id="green">Green</string>
-	<string id="dark_green">Dark Green</string>
-	<string id="blue">Blue</string>
-	<string id="dark_blue">Dark Blue</string>
-	<string id="purple">Purple</string>
-	<string id="pink">Pink</string>
+	<string id="propertyShowBattery">Show battery status</string>
+	<string id="propertyShowNotification">Show notifications icon when there are some</string>
+	<string id="propertyShowAlarm">Show alarm icon when active alarm is set</string>
+	<string id="propertyShowDate">Show date</string>
+	<string id="propertyShowBluetooth">Show bluetooth icon when connection is up</string>
 	
 	<string id="propertyOrbitDistanceHour">Distance Hour</string>
 	<string id="propertyOrbitDistanceMinute">Distance Minute</string>
@@ -50,6 +43,21 @@
 	<string id="propertyFontSizeDate">Font size for date</string>
 	<string id="propertyFontSizeClockHour">Font size for hours</string>
 	<string id="propertyFontSizeClockMinute">Font size for minutes</string>
+	
+	<string id="white">White</string>
+    <string id="light_gray">Gray</string>
+    <string id="dark_gray">Dark Gray</string>
+    <string id="black">Black</string>
+    <string id="red">Red</string>
+    <string id="dark_red">Dark Red</string>
+    <string id="orange">Orange</string>
+    <string id="yellow">Yellow</string>
+	<string id="green">Green</string>
+	<string id="dark_green">Dark Green</string>
+	<string id="blue">Blue</string>
+	<string id="dark_blue">Dark Blue</string>
+	<string id="purple">Purple</string>
+	<string id="pink">Pink</string>
 	
 	<string id="xtiny">Extremely tiny</string>
 	<string id="tiny">Tiny</string>
