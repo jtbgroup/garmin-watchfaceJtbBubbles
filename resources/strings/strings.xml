@@ -11,7 +11,7 @@
    	<string id="propertyColorClockHour">Color for hours (bubble and orbit)</string>
    	<string id="propertyColorClockMinute">Color for minutes (bubble and orbit)</string>
     <string id="propertyColorClockSecond">Color for seconds (sattelite and orbit)</string>
-    <string id="propertyColorClockTextHour">Color for hours (number and orbit)</string>
+    <string id="propertyColorClockTextHour">Color for hours (number)</string>
    	<string id="propertyColorClockTextMinute">Color for minutes (number)</string>
     <string id="propertyColorDate">Color date</string>
     <string id="propertyColorBubbleBorder">Color of the border of the bubbles</string>
