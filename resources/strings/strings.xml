@@ -1,7 +1,6 @@
 <strings>
 
-    <string id="AppName_DEV">JtB Face Bubble - BETA</string>
-    <string id="AppName_PROD">JtB Face Bubble</string>
+    <string id="AppName">JtB Face Bubble</string>
 
     <string id="propertyHourMode">Hour Mode</string>
     <string id="hourMode_12">12 Hour</string>
@@ -9,9 +8,13 @@
     
       
     <string id="propertyColorBackground">Background color</string>
-   	<string id="propertyColorHour">Color for Hours</string>
-   	<string id="propertyColorMinute">Color for Minutes</string>
-    <string id="propertyColorSecond">Color for Seconds</string>
+   	<string id="propertyColorClockHour">Color for Hours</string>
+   	<string id="propertyColorClockMinute">Color for Minutes</string>
+    <string id="propertyColorClockSecond">Color for Seconds</string>
+    
+	<string id="propertyIconColorBluetooth">Color for the bluetooth connection icon</string>
+	<string id="propertyIconColorAlarm">Color for the alarm icon</string>
+	<string id="propertyIconColorNotification">Color for the notification icon</string>
 	
     <string id="white">White</string>
     <string id="light_gray">Gray</string>
@@ -28,9 +31,9 @@
 	<string id="purple">Purple</string>
 	<string id="pink">Pink</string>
 	
-	<string id="propertyDistanceHour">Distance Hour</string>
-	<string id="propertyDistanceMinute">Distance Minute</string>
-	<string id="propertyDistanceSecond">Distance Second</string>
+	<string id="propertyOrbitDistanceHour">Distance Hour</string>
+	<string id="propertyOrbitDistanceMinute">Distance Minute</string>
+	<string id="propertyOrbitDistanceSecond">Distance Second</string>
 
 	<string id="propertyOrbitHour">Show Hour Orbit</string>
 	<string id="propertyOrbitMinute">Show Minute Orbit</string>
@@ -43,5 +46,13 @@
 	<string id="propertyDateFormat">Date format</string>
 	<string id="dayNum_monthNum">day / month</string>
 	<string id="monthNum_dayNum_">month / day</string>
+	
+	<string id="propertyFontSizeDate">Font size for date</string>
+	<string id="propertyFontSizeClockHour">Font size for hours</string>
+	<string id="propertyFontSizeClockMinute">Font size for minutes</string>
+	
+	<string id="xtiny">Extremely tiny</string>
+	<string id="tiny">Tiny</string>
+	<string id="small">Small</string>
 	
 </strings>

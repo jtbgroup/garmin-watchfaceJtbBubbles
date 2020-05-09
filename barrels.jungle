@@ -1,0 +1,9 @@
+# Do not hand edit this file. To make changes right click
+# on the project and select "Configure Monkey Barrels".
+
+JTBUtils = "/home/gautier/git/garmin/garmin-barrelJtbUtils/bin/garmin-barrelJtbUtils-1.1.0.barrel"
+base.barrelPath = $(base.barrelPath);$(JTBUtils)
+
+JTBComponents = "/home/gautier/git/garmin/garmin-barrelJtbComponents/bin/garmin-barrelJtbComponents-1.0.0.barrel"
+base.barrelPath = $(base.barrelPath);$(JTBComponents)
+

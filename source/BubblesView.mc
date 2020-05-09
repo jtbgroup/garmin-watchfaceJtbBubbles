@@ -3,76 +3,139 @@ using Toybox.Graphics as Gfx;
 using Toybox.System;
 using Toybox.Lang;
 using Toybox.Time.Gregorian as Calendar;
-using PropertiesHelper as Ph;
+using JTBUtils as Utils;
+using BubblesConstants as Cst;
+using JTBComponents as Compo;
 
 class BubblesView extends Ui.WatchFace {
 
 	var COLOR_FOREGROUND = Gfx.COLOR_WHITE;
 	var COLOR_TRANSPARENT= Gfx.COLOR_TRANSPARENT;
-	
-	var HOUR_ANGLE = 0;
-	var MIN_ANGLE = 0;
-	var SEC_ANGLE = 0;
-	var HOUR_RAD = 20;
-	var MIN_RAD = 15;
-	var SEC_RAD = 5;
 
-	var FONT_HOUR = Gfx.FONT_SYSTEM_MEDIUM;
-	var FONT_MIN = Gfx.FONT_SYSTEM_TINY;
-	var FONT_DATE = Gfx.FONT_SYSTEM_XTINY;
+	//CONSTANTS
+	hidden var ANGLE_MINUTE = 6;
+	hidden var ANGLE_SECOND = 6;
+//	hidden var RADIUS_BUBBLE_SECOND = 5;
 	
-	var iconBT, iconBell, iconEnveloppe = null;
-	var screenWidth, screenHeight= 0;
-	var sleeping=false;
+	hidden const FONT_ICON_CHAR_ALARM="0";
+	hidden const FONT_ICON_CHAR_BLUETOOTH="1";
+	hidden const FONT_ICON_CHAR_NOTIFICATION="2";
+	hidden const FONT_ICON_CHAR_SATELLITE="3";
+	
+	//INSTANCE VARIBLES
+	//properties
+	hidden var colorBackground, colorHour, colorMinute, colorSecond;
+	hidden var iconColorAlarm, iconColorBluetooth, iconColorNotification;
+	hidden var hourMode, dateFormat, orbitDistanceHour, orbitDistanceMinute, orbitDistanceSecond, orbitWidthHour, orbitWidthMinute, orbitWidthSecond; 
+	hidden var showOrbitHour, showOrbitMinute, showOrbitSecond;
+	hidden var fontIcons, fontHour, fontMinute, fontDate;
+	//coordinates
+	hidden var co_Screen_Width, co_Screen_Height;
+	hidden var batteryComponent;
+	hidden var radiusBubbleHour, radiusBubbleMinute;
+	hidden var angleHour;
+	hidden var sleeping=false;
+	hidden var dc;
+	
 
     function onLayout(dc){
-    	iconEnveloppe = Ui.loadResource( Rez.Drawables.iconEnveloppe );
-    	iconBell = Ui.loadResource( Rez.Drawables.iconBell );
-    	iconBT = Ui.loadResource( Rez.Drawables.iconBT );
-	    setLayout( Rez.Layouts.MainLayout( dc ) );
+    	me.dc = dc;
+    	fontIcons = Ui.loadResource(Rez.Fonts.fontIcons);
+    	reloadBasics (false);
+    	computeCoordinates(dc);
+    	
+    	batteryComponent = new Compo.BatteryComponent({
+			:locX=>co_Screen_Width/2,
+			:locY=>co_Screen_Height - 15,
+			:bgc=>COLOR_TRANSPARENT,
+			:fgc=>COLOR_FOREGROUND,
+			:dc=>dc,
+			:font=>null,
+			:showText=>false
+		});
+    }
+    
+     function computeCoordinates(dc){
+    	//get screen dimensions
+		co_Screen_Width = dc.getWidth();
+        co_Screen_Height = dc.getHeight();
+     }
+
+ 	function reloadBasics(reloadComponents){
+    	reloadBasicColors();
+    	reloadFonts();
+    	reloadShows();
+    	reloadMetrics();
+    	if(reloadComponents){
+	    	reloadComponents();
+    	}
+    }
+    
+    function reloadFonts(){
+    	fontHour = Utils.getPropertyAsFont(Cst.PROP_FONT_SIZE_CLOCK_HOUR);
+    	fontMinute = Utils.getPropertyAsFont(Cst.PROP_FONT_SIZE_CLOCK_MINUTE);
+    	fontDate = Utils.getPropertyAsFont(Cst.PROP_FONT_SIZE_DATE);
+    }
+    
+    
+    function reloadShows(){
+    	showOrbitHour = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_HOUR);
+		showOrbitMinute = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_MINUTE);
+		showOrbitSecond = Utils.getPropertyValue(Cst.PROP_SHOW_ORBIT_SECOND);
+    }
+    
+    function reloadComponents(){
+  		batteryComponent.setForegroundColor(COLOR_FOREGROUND);
+    }
+    
+	function reloadMetrics(){
+		hourMode = Utils.getPropertyValue(Cst.PROP_HOUR_MODE);
+		dateFormat = Utils.getPropertyValue(Cst.PROP_DATE_FORMAT);
+		orbitDistanceHour = Utils.getPropertyValue(Cst.PROP_ORBIT_DISTANCE_HOUR);
+		orbitDistanceMinute = Utils.getPropertyValue(Cst.PROP_ORBIT_DISTANCE_MINUTE);
+		orbitDistanceSecond = Utils.getPropertyValue(Cst.PROP_ORBIT_DISTANCE_SECOND);
+		orbitWidthHour = Utils.getPropertyValue(Cst.PROP_ORBIT_WIDTH_HOUR);
+		orbitWidthMinute = Utils.getPropertyValue(Cst.PROP_ORBIT_WIDTH_MINUTE);
+		orbitWidthSecond = Utils.getPropertyValue(Cst.PROP_ORBIT_WIDTH_SECOND);
+		
+		if(hourMode == Cst.OPTION_HOUR_MODE_24){
+    		angleHour = 15;
+    	}else{
+    		angleHour = 30;
+    	}
+    	
+    	radiusBubbleHour = getMax(dc.getTextDimensions("04", fontHour))/2;
+    	radiusBubbleMinute = getMax(dc.getTextDimensions("44", fontMinute))/2;
+	}
+	
+	function getMax(numberArray){
+		var result = numberArray[0];
+		for(var i = 1; i < numberArray.size(); i++){
+			if(numberArray[i] > result){
+				result = numberArray[i];
+			}
+		}
+		return result;
+	}
+	
+    function reloadBasicColors(){
+    	colorBackground = Utils.getPropertyAsColor(Cst.PROP_COLOR_BACKGROUND);
+	    colorHour = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_HOUR);
+    	colorMinute = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_MINUTE);
+    	colorSecond = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_SECOND);
+    	
+    	iconColorAlarm = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_ALARM);
+    	iconColorBluetooth = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_BLUETOOTH);
+    	iconColorNotification = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_NOTIFICATION);
     }
 
 
-	function onUpdate(dc){
-		onUpdate2(dc);
-	}
-	
-     function onUpdateWithLayout(dc) {
-     	View.onUpdate(dc);
-        
-        
-        MIN_ANGLE = 6;
-    	SEC_ANGLE = 6;
-		
-		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_24){
-    		HOUR_ANGLE = 15;
-    	}else{
-    		HOUR_ANGLE = 30;
-    	}	
-
-    	screenHeight = dc.getHeight();
-    	screenWidth = dc.getWidth();
-    		
-    	displayTime(dc);
-     }
-     
     // Update the view
-    function onUpdate2(dc) {
-		MIN_ANGLE = 6;
-    	SEC_ANGLE = 6;
-		
-		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_24){
-    		HOUR_ANGLE = 15;
-    	}else{
-    		HOUR_ANGLE = 30;
-    	}	
-
-    	screenHeight = dc.getHeight();
-    	screenWidth = dc.getWidth();
-    	
-    	dc.setColor(COLOR_FOREGROUND, Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
+	function onUpdate(dc){
+    	dc.setColor(COLOR_FOREGROUND, colorBackground);
     	dc.clear();
     	
+    	batteryComponent.draw(dc);
     	displayAlarm(dc);    	
     	displayNotifications(dc);
 		displayBT(dc);
@@ -82,13 +145,15 @@ class BubblesView extends Ui.WatchFace {
     
     function displayBT(dc){
     	if(System.getDeviceSettings().phoneConnected){
-		    dc.drawBitmap(screenWidth - 13, screenHeight/2-8 , iconBT);	
+		    dc.setColor(iconColorBluetooth,COLOR_TRANSPARENT);
+		    dc.drawText(co_Screen_Width - 5, co_Screen_Height/2, fontIcons, FONT_ICON_CHAR_BLUETOOTH, Gfx.TEXT_JUSTIFY_RIGHT | Gfx.TEXT_JUSTIFY_VCENTER);
 		}
     }
     
     function displayAlarm(dc){
     	if(System.getDeviceSettings().alarmCount >= 1){
-		    dc.drawBitmap(4, screenHeight/2-8 , iconBell);	
+    		dc.setColor(iconColorAlarm,COLOR_TRANSPARENT);
+		    dc.drawText(5, co_Screen_Height/2, fontIcons, FONT_ICON_CHAR_ALARM, Gfx.TEXT_JUSTIFY_LEFT | Gfx.TEXT_JUSTIFY_VCENTER);
 		}
     }
     
@@ -96,8 +161,8 @@ class BubblesView extends Ui.WatchFace {
     	dc.setColor(COLOR_FOREGROUND, COLOR_TRANSPARENT);
 		var notif = System.getDeviceSettings().notificationCount;
 		if(notif>0){
-		    dc.drawBitmap(screenWidth/2 - 13, 5 , iconEnveloppe);
-//			dc.drawText(64, heartR_y, FONT_SMALL, notif.toString(),Gfx.TEXT_JUSTIFY_LEFT);	    	
+			dc.setColor(iconColorNotification,COLOR_TRANSPARENT);
+		    dc.drawText(co_Screen_Width/2, 10, fontIcons, FONT_ICON_CHAR_NOTIFICATION, Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
 		}
     }
     
@@ -105,16 +170,16 @@ class BubblesView extends Ui.WatchFace {
    		var info = Calendar.info(Time.now(), Time.FORMAT_SHORT);
    		
    		var data = [info.day.format("%02d"), info.month.format("%02d")];
-   		if(Ph.getValue(Ph.PROP_DATE_FORMAT) == Ph.OPTION_DATE_FORMAT_DDMM){
+   		if(dateFormat == Cst.OPTION_DATE_FORMAT_DDMM){
    			data = [info.day.format("%02d"), info.month.format("%02d")];
-   		}else if(Ph.getValue(Ph.PROP_DATE_FORMAT) == Ph.OPTION_DATE_FORMAT_DDMM){
+   		}else if(dateFormat == Cst.OPTION_DATE_FORMAT_MMDD){
    			data = [info.month.format("%02d"), info.day.format("%02d")];
    		}
    		
         var dateStr = Lang.format("$1$/$2$", data);
         dc.setColor(COLOR_FOREGROUND, COLOR_TRANSPARENT);
-        var fh=dc.getFontHeight(FONT_DATE);
-        dc.drawText(screenWidth/2,screenHeight/2-fh/2, FONT_DATE, dateStr, Gfx.TEXT_JUSTIFY_CENTER);
+        var fh=dc.getFontHeight(fontDate);
+        dc.drawText(co_Screen_Width/2,co_Screen_Height/2-fh/2, fontDate, dateStr, Gfx.TEXT_JUSTIFY_CENTER);
     }
     
     function displayTime(dc){
@@ -129,7 +194,7 @@ class BubblesView extends Ui.WatchFace {
 		displayMinutes(dc, clockTime.min);    
 				
 		var hour = clockTime.hour;
-		if(Ph.getValue(Ph.PROP_HOUR_MODE) == Ph.OPTION_HOUR_MODE_12 && hour >= 12){
+		if(hourMode == Cst.OPTION_HOUR_MODE_12 && hour >= 12){
 			hour = hour - 12;
 		}
 		displayHour(dc, hour); 
@@ -137,69 +202,71 @@ class BubblesView extends Ui.WatchFace {
     
     
     function displaySeconds(dc, second){
-    	var coord= getXY(second*SEC_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_SECOND));
+    	var coord= getXY(second*ANGLE_SECOND, orbitDistanceSecond);
     	var coordX = coord[0];
     	var coordY = coord[1];
     	
     	//draw orbit
-		if(Ph.getValue(Ph.PROP_ORBIT_SECOND)){
-			dc.setColor(Ph.getValue(Ph.PROP_COLOR_SECOND), Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
-			dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_SECOND));
-			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_SECOND));
+		if(showOrbitSecond){
+			dc.setColor(colorSecond, colorBackground); 
+			dc.setPenWidth(orbitWidthSecond);
+			dc.drawCircle(co_Screen_Width/2, co_Screen_Height/2, orbitDistanceSecond);
 			dc.setPenWidth(1);
 		}
 		
 		//draw bubbles
-		dc.setColor(Ph.getValue(Ph.PROP_COLOR_SECOND), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
-		dc.fillCircle(coordX, coordY, SEC_RAD);
+		dc.setColor(colorSecond, COLOR_TRANSPARENT); 
+		dc.drawText(coordX, coordY, fontIcons, FONT_ICON_CHAR_SATELLITE, Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
+//		dc.fillCircle(coordX, coordY, RADIUS_BUBBLE_SECOND);
 //		dc.setColor(COLOR_BACKGROUND, Gfx.COLOR_TRANSPARENT); 
 //		var fontH = dc.getFontHeight(FONT_HOUR);
 //		dc.drawText(coordX, coordY-fontH/2, FONT_HOUR, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
     }  
     
     function displayHour(dc, hour){
-		var coord= getXY(hour*HOUR_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_HOUR));
+		var coord= getXY(hour*angleHour, orbitDistanceHour);
     	var coordX = coord[0];
     	var coordY = coord[1];
 		
 		//draw orbit
-		if(Ph.getValue(Ph.PROP_ORBIT_HOUR)){
-			dc.setColor(Ph.getValue(Ph.PROP_COLOR_HOUR), Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
-			dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_HOUR));
-			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_HOUR));
+		if(showOrbitHour){
+			dc.setColor(colorHour, colorBackground); 
+			dc.setPenWidth(orbitWidthSecond);
+			dc.drawCircle(co_Screen_Width/2, co_Screen_Height/2, orbitDistanceHour);
 			dc.setPenWidth(1);
 		}
 		
 		//draw bubbles
-		dc.setColor( Ph.getValue(Ph.PROP_COLOR_HOUR) , Ph.getValue(Ph.PROP_COLOR_BACKGROUND)); 
-		dc.fillCircle(coordX, coordY, HOUR_RAD);
-		dc.setColor(Ph.getValue(Ph.PROP_COLOR_BACKGROUND), Gfx.COLOR_TRANSPARENT); 
-		var fontH = dc.getFontHeight(FONT_HOUR);
-		dc.drawText(coordX, coordY-fontH/2, FONT_HOUR, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
+		dc.setColor( Gfx.COLOR_LT_GRAY, COLOR_TRANSPARENT); 
+		dc.drawCircle(coordX, coordY, radiusBubbleHour+1);
+		dc.setColor( colorHour, COLOR_TRANSPARENT); 
+		dc.fillCircle(coordX, coordY, radiusBubbleHour);
+		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
+		dc.drawText(coordX, coordY, fontHour, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
     
     
     function displayMinutes(dc, minutes){
     	//6 degrees per minute
-		var coord= getXY(minutes*MIN_ANGLE, Ph.getValue(Ph.PROP_DISTANCE_MINUTE));
-    	
+		var coord= getXY(minutes*ANGLE_MINUTE, orbitDistanceMinute);
     	var coordX = coord[0];
     	var coordY = coord[1];
     	
     	//draw orbit
-    	if(Ph.getValue(Ph.PROP_ORBIT_MINUTE)){
-    		dc.setColor(Ph.getValue(Ph.PROP_COLOR_MINUTE), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
-    		dc.setPenWidth(Ph.getValue(Ph.PROP_ORBIT_WIDTH_MINUTE));
-			dc.drawCircle(screenWidth/2, screenHeight/2, Ph.getValue(Ph.PROP_DISTANCE_MINUTE));
+    	if(showOrbitMinute){
+    		dc.setColor(colorMinute, COLOR_TRANSPARENT);
+    		dc.setPenWidth(orbitWidthMinute);
+			dc.drawCircle(co_Screen_Width/2, co_Screen_Height/2, orbitDistanceMinute);
 			dc.setPenWidth(1);
 		}
 		
-		//draw bubble
-		dc.setColor(Ph.getValue(Ph.PROP_COLOR_MINUTE), Ph.getValue(Ph.PROP_COLOR_BACKGROUND));
-		dc.fillCircle(coordX, coordY, MIN_RAD);
-		dc.setColor(Ph.getValue(Ph.PROP_COLOR_BACKGROUND), Gfx.COLOR_TRANSPARENT); 
-		var fontH = dc.getFontHeight(FONT_MIN);
-		dc.drawText(coordX, coordY-fontH/2, FONT_MIN, minutes.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
+		//draw bubbles
+		dc.setColor( Gfx.COLOR_LT_GRAY, COLOR_TRANSPARENT); 
+		dc.drawCircle(coordX, coordY, radiusBubbleMinute+1);
+		dc.setColor(colorMinute, COLOR_TRANSPARENT);
+		dc.fillCircle(coordX, coordY, radiusBubbleMinute);
+		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
+		dc.drawText(coordX, coordY, fontMinute, minutes.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
 
 	// bas angle is in degree
@@ -213,33 +280,33 @@ class BubblesView extends Ui.WatchFace {
     	
     	if(cosAngle > 0 && sinAngle >= 0){
     		var sideY = cosAngle * distance;
-    		y = screenHeight / 2 - sideY;
+    		y = co_Screen_Height / 2 - sideY;
     		var sideX = sinAngle * distance;
-    		x = screenWidth/2 + sideX;
+    		x = co_Screen_Width/2 + sideX;
     	}else if (cosAngle < 0 && sinAngle > 0){
     		angle = 180 - baseAngle;
 	    	cosAngle = Math.cos(Math.toRadians(angle));
 	    	sinAngle = Math.sin(Math.toRadians(angle));
    	  		var sideY = cosAngle * distance;
     		var sideX = sinAngle * distance;
-    		y = screenHeight / 2 + sideY;
-    		x = screenWidth/2 + sideX;
+    		y = co_Screen_Height / 2 + sideY;
+    		x = co_Screen_Width/2 + sideX;
     	}else if (cosAngle < 0 && sinAngle < 0){
     		angle = baseAngle - 180;
 	    	cosAngle = Math.cos(Math.toRadians(angle));
 	    	sinAngle = Math.sin(Math.toRadians(angle));
    	  		var sideY = cosAngle * distance;
     		var sideX = sinAngle * distance;
-    		y = screenHeight / 2 + sideY;
-    		x = screenWidth / 2 - sideX;
+    		y = co_Screen_Height / 2 + sideY;
+    		x = co_Screen_Width / 2 - sideX;
     	}else if (cosAngle > 0 && sinAngle < 0){
     		angle = 360 - baseAngle;
 	    	cosAngle = Math.cos(Math.toRadians(angle));
 	    	sinAngle = Math.sin(Math.toRadians(angle));
    	  		var sideY = cosAngle * distance;
     		var sideX = sinAngle * distance;
-    		y = screenHeight / 2 - sideY;
-    		x = screenWidth / 2 - sideX;
+    		y = co_Screen_Height / 2 - sideY;
+    		x = co_Screen_Width / 2 - sideX;
     	}
     	
     	return [x, y];

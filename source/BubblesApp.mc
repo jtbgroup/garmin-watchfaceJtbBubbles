@@ -6,18 +6,14 @@ class BubblesApp extends Application.AppBase {
 	
     function initialize() {
         AppBase.initialize();
-        PropertiesHelper.loadProperties();
     }
 
     // onStart() is called on application start up
     function onStart(state) {
-	    System.print(">>>>> on start");
-		
     }
 
     // onStop() is called when your application is exiting
     function onStop(state) {
-        System.print(">>>>> on stop");
     }
 
     // Return the initial view of your application here
@@ -27,7 +23,7 @@ class BubblesApp extends Application.AppBase {
     }
     
     function onSettingsChanged(){
-		PropertiesHelper.loadProperties();
+    	view.reloadBasics(true);
 	}
 
 }
