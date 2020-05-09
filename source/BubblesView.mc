@@ -24,7 +24,7 @@ class BubblesView extends Ui.WatchFace {
 	
 	//INSTANCE VARIBLES
 	//properties
-	hidden var colorBackground, colorHour, colorMinute, colorSecond, colorBubbleBorder, colorDate;
+	hidden var colorBackground, colorHour, colorMinute, colorSecond, colorBubbleBorder, colorDate, colorTextHour, colorTextMinute;
 	hidden var iconColorAlarm, iconColorBluetooth, iconColorNotification;
 	hidden var hourMode, dateFormat, orbitDistanceHour, orbitDistanceMinute, orbitDistanceSecond, orbitWidthHour, orbitWidthMinute, orbitWidthSecond; 
 	hidden var showOrbitHour, showOrbitMinute, showOrbitSecond, showDate, showAlarm, showBattery, showNotification, showBluetooth;
@@ -141,6 +141,8 @@ class BubblesView extends Ui.WatchFace {
     	colorSecond = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_SECOND);
     	colorBubbleBorder = Utils.getPropertyAsColor(Cst.PROP_COLOR_BUBBLE_BORDER);
     	colorDate = Utils.getPropertyAsColor(Cst.PROP_COLOR_DATE);
+    	colorTextHour = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_TEXT_HOUR);
+    	colorTextMinute = Utils.getPropertyAsColor(Cst.PROP_COLOR_CLOCK_TEXT_MINUTE);
     	
     	iconColorAlarm = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_ALARM);
     	iconColorBluetooth = Utils.getPropertyAsColor(Cst.PROP_ICON_COLOR_BLUETOOTH);
@@ -210,7 +212,7 @@ class BubblesView extends Ui.WatchFace {
    		}
    		
         var dateStr = Lang.format("$1$/$2$", data);
-        dc.setColor(colorBubbleBorder, COLOR_TRANSPARENT);
+        dc.setColor(colorDate, COLOR_TRANSPARENT);
         var fh=dc.getFontHeight(fontDate);
         dc.drawText(co_Screen_Width/2,co_Screen_Height/2-fh/2, fontDate, dateStr, Gfx.TEXT_JUSTIFY_CENTER);
     }
@@ -265,7 +267,7 @@ class BubblesView extends Ui.WatchFace {
 		//draw orbit
 		if(showOrbitHour){
 			dc.setColor(colorHour, colorBackground); 
-			dc.setPenWidth(orbitWidthSecond);
+			dc.setPenWidth(orbitWidthHour);
 			dc.drawCircle(co_Screen_Width/2, co_Screen_Height/2, orbitDistanceHour);
 			dc.setPenWidth(1);
 		}
@@ -275,7 +277,7 @@ class BubblesView extends Ui.WatchFace {
 		dc.fillCircle(coordX, coordY, radiusBubbleHour+1);
 		dc.setColor( colorHour, COLOR_TRANSPARENT); 
 		dc.fillCircle(coordX, coordY, radiusBubbleHour);
-		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
+		dc.setColor(colorTextHour, COLOR_TRANSPARENT); 
 		dc.drawText(coordX, coordY, fontHour, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
     
@@ -299,7 +301,7 @@ class BubblesView extends Ui.WatchFace {
 		dc.fillCircle(coordX, coordY, radiusBubbleMinute+1);
 		dc.setColor(colorMinute, COLOR_TRANSPARENT);
 		dc.fillCircle(coordX, coordY, radiusBubbleMinute);
-		dc.setColor(colorBackground, COLOR_TRANSPARENT); 
+		dc.setColor(colorTextMinute, COLOR_TRANSPARENT); 
 		dc.drawText(coordX, coordY, fontMinute, minutes.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER);
     }
 

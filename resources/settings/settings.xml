@@ -58,12 +58,24 @@
 			<listEntry value="11">@Strings.dark_blue</listEntry>
 			<listEntry value="12">@Strings.purple</listEntry>
 			<listEntry value="13">@Strings.pink</listEntry>
+			<listEntry value="21">@Strings.blue_0x0055AA</listEntry>
+			<listEntry value="22">@Strings.blue_0x000055</listEntry>
+			<listEntry value="23">@Strings.blue_0x00FFFF</listEntry>
+			<listEntry value="31">@Strings.purple_0xAA55FF</listEntry>
+			<listEntry value="32">@Strings.purple_0x0x55005</listEntry>
+			<listEntry value="41">@Strings.orange_0xFFAAAA</listEntry>
+			<listEntry value="51">@Strings.yellow_0xFFFFAA</listEntry>
+			<listEntry value="61">@Strings.green_0xAAFFAA</listEntry>
+			<listEntry value="62">@Strings.green_0x005555</listEntry>
+			<listEntry value="71">@Strings.red_0xFF0055</listEntry>
+			<listEntry value="81">@Strings.brown_0x550000</listEntry>
+			<listEntry value="91">@Strings.pink_0xFF00AA</listEntry>
 		</settingConfig>
 	</setting>
 
 	<setting propertyKey="@Properties.PROP_COLOR_CLOCK_MINUTE"
 		title="@Strings.propertyColorClockMinute">
-		<settingConfig type="list">
+			<settingConfig type="list">
 			<listEntry value="0">@Strings.white</listEntry>
 			<listEntry value="1">@Strings.light_gray</listEntry>
 			<listEntry value="2">@Strings.dark_gray</listEntry>
@@ -78,12 +90,88 @@
 			<listEntry value="11">@Strings.dark_blue</listEntry>
 			<listEntry value="12">@Strings.purple</listEntry>
 			<listEntry value="13">@Strings.pink</listEntry>
+			<listEntry value="21">@Strings.blue_0x0055AA</listEntry>
+			<listEntry value="22">@Strings.blue_0x000055</listEntry>
+			<listEntry value="23">@Strings.blue_0x00FFFF</listEntry>
+			<listEntry value="31">@Strings.purple_0xAA55FF</listEntry>
+			<listEntry value="32">@Strings.purple_0x0x55005</listEntry>
+			<listEntry value="41">@Strings.orange_0xFFAAAA</listEntry>
+			<listEntry value="51">@Strings.yellow_0xFFFFAA</listEntry>
+			<listEntry value="61">@Strings.green_0xAAFFAA</listEntry>
+			<listEntry value="62">@Strings.green_0x005555</listEntry>
+			<listEntry value="71">@Strings.red_0xFF0055</listEntry>
+			<listEntry value="81">@Strings.brown_0x550000</listEntry>
+			<listEntry value="91">@Strings.pink_0xFF00AA</listEntry>
+		</settingConfig>
+	</setting>
+	
+	<setting propertyKey="@Properties.PROP_COLOR_CLOCK_TEXT_HOUR"
+		title="@Strings.propertyColorClockTextHour">
+			<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+			<listEntry value="21">@Strings.blue_0x0055AA</listEntry>
+			<listEntry value="22">@Strings.blue_0x000055</listEntry>
+			<listEntry value="23">@Strings.blue_0x00FFFF</listEntry>
+			<listEntry value="31">@Strings.purple_0xAA55FF</listEntry>
+			<listEntry value="32">@Strings.purple_0x0x55005</listEntry>
+			<listEntry value="41">@Strings.orange_0xFFAAAA</listEntry>
+			<listEntry value="51">@Strings.yellow_0xFFFFAA</listEntry>
+			<listEntry value="61">@Strings.green_0xAAFFAA</listEntry>
+			<listEntry value="62">@Strings.green_0x005555</listEntry>
+			<listEntry value="71">@Strings.red_0xFF0055</listEntry>
+			<listEntry value="81">@Strings.brown_0x550000</listEntry>
+			<listEntry value="91">@Strings.pink_0xFF00AA</listEntry>
+		</settingConfig>
+	</setting>
+
+	<setting propertyKey="@Properties.PROP_COLOR_CLOCK_TEXT_MINUTE"
+		title="@Strings.propertyColorClockTextMinute">
+			<settingConfig type="list">
+			<listEntry value="0">@Strings.white</listEntry>
+			<listEntry value="1">@Strings.light_gray</listEntry>
+			<listEntry value="2">@Strings.dark_gray</listEntry>
+			<listEntry value="3">@Strings.black</listEntry>
+			<listEntry value="4">@Strings.red</listEntry>
+			<listEntry value="5">@Strings.dark_red</listEntry>
+			<listEntry value="6">@Strings.orange</listEntry>
+			<listEntry value="7">@Strings.yellow</listEntry>
+			<listEntry value="8">@Strings.green</listEntry>
+			<listEntry value="9">@Strings.dark_green</listEntry>
+			<listEntry value="10">@Strings.blue</listEntry>
+			<listEntry value="11">@Strings.dark_blue</listEntry>
+			<listEntry value="12">@Strings.purple</listEntry>
+			<listEntry value="13">@Strings.pink</listEntry>
+			<listEntry value="21">@Strings.blue_0x0055AA</listEntry>
+			<listEntry value="22">@Strings.blue_0x000055</listEntry>
+			<listEntry value="23">@Strings.blue_0x00FFFF</listEntry>
+			<listEntry value="31">@Strings.purple_0xAA55FF</listEntry>
+			<listEntry value="32">@Strings.purple_0x0x55005</listEntry>
+			<listEntry value="41">@Strings.orange_0xFFAAAA</listEntry>
+			<listEntry value="51">@Strings.yellow_0xFFFFAA</listEntry>
+			<listEntry value="61">@Strings.green_0xAAFFAA</listEntry>
+			<listEntry value="62">@Strings.green_0x005555</listEntry>
+			<listEntry value="71">@Strings.red_0xFF0055</listEntry>
+			<listEntry value="81">@Strings.brown_0x550000</listEntry>
+			<listEntry value="91">@Strings.pink_0xFF00AA</listEntry>
 		</settingConfig>
 	</setting>
 	
 	<setting propertyKey="@Properties.PROP_COLOR_CLOCK_SECOND"
 		title="@Strings.propertyColorClockSecond">
-		<settingConfig type="list">
+			<settingConfig type="list">
 			<listEntry value="0">@Strings.white</listEntry>
 			<listEntry value="1">@Strings.light_gray</listEntry>
 			<listEntry value="2">@Strings.dark_gray</listEntry>
@@ -98,6 +186,18 @@
 			<listEntry value="11">@Strings.dark_blue</listEntry>
 			<listEntry value="12">@Strings.purple</listEntry>
 			<listEntry value="13">@Strings.pink</listEntry>
+			<listEntry value="21">@Strings.blue_0x0055AA</listEntry>
+			<listEntry value="22">@Strings.blue_0x000055</listEntry>
+			<listEntry value="23">@Strings.blue_0x00FFFF</listEntry>
+			<listEntry value="31">@Strings.purple_0xAA55FF</listEntry>
+			<listEntry value="32">@Strings.purple_0x0x55005</listEntry>
+			<listEntry value="41">@Strings.orange_0xFFAAAA</listEntry>
+			<listEntry value="51">@Strings.yellow_0xFFFFAA</listEntry>
+			<listEntry value="61">@Strings.green_0xAAFFAA</listEntry>
+			<listEntry value="62">@Strings.green_0x005555</listEntry>
+			<listEntry value="71">@Strings.red_0xFF0055</listEntry>
+			<listEntry value="81">@Strings.brown_0x550000</listEntry>
+			<listEntry value="91">@Strings.pink_0xFF00AA</listEntry>
 		</settingConfig>
 	</setting>
 	
@@ -223,6 +323,7 @@
 			<listEntry value="0">@Strings.xtiny</listEntry>
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
+			<listEntry value="3">@Strings.medium</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.PROP_FONT_SIZE_CLOCK_HOUR"
@@ -231,6 +332,7 @@
 			<listEntry value="0">@Strings.xtiny</listEntry>
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
+			<listEntry value="3">@Strings.medium</listEntry>
 		</settingConfig>
 	</setting>
 	<setting propertyKey="@Properties.PROP_FONT_SIZE_CLOCK_MINUTE"
@@ -239,6 +341,7 @@
 			<listEntry value="0">@Strings.xtiny</listEntry>
 			<listEntry value="1">@Strings.tiny</listEntry>
 			<listEntry value="2">@Strings.small</listEntry>
+			<listEntry value="3">@Strings.medium</listEntry>
 		</settingConfig>
 	</setting>
 	

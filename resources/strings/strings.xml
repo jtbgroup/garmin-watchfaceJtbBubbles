@@ -8,9 +8,11 @@
     
       
     <string id="propertyColorBackground">Background color</string>
-   	<string id="propertyColorClockHour">Color for Hours</string>
-   	<string id="propertyColorClockMinute">Color for Minutes</string>
-    <string id="propertyColorClockSecond">Color for Seconds (sattelite)</string>
+   	<string id="propertyColorClockHour">Color for hours (bubble and orbit)</string>
+   	<string id="propertyColorClockMinute">Color for minutes (bubble and orbit)</string>
+    <string id="propertyColorClockSecond">Color for seconds (sattelite and orbit)</string>
+    <string id="propertyColorClockTextHour">Color for hours (number and orbit)</string>
+   	<string id="propertyColorClockTextMinute">Color for minutes (number)</string>
     <string id="propertyColorDate">Color date</string>
     <string id="propertyColorBubbleBorder">Color of the border of the bubbles</string>
     
@@ -58,9 +60,22 @@
 	<string id="dark_blue">Dark Blue</string>
 	<string id="purple">Purple</string>
 	<string id="pink">Pink</string>
+	<string id="blue_0x0055AA">Blue (OX055AA)</string>
+	<string id="blue_0x000055">Blue (Ox000055)</string>
+	<string id="blue_0x00FFFF">Blue (0x00FFFF)</string>
+	<string id="purple_0xAA55FF">Purple (0xAA55FF)</string>
+	<string id="purple_0x0x55005">Purple(0x0x55005)</string>
+	<string id="orange_0xFFAAAA">Orange (0xFFAAAA)</string>
+	<string id="yellow_0xFFFFAA">Yellow (y0xFFFFAA)</string>
+	<string id="green_0xAAFFAA">Green (0xAAFFAA)</string>
+	<string id="green_0x005555">Green (0x005555)</string>
+	<string id="red_0xFF0055">Red (0xFF0055)</string>
+	<string id="brown_0x550000">Brown (0x550000)</string>
+	<string id="pink_0xFF00AA">Pink (0xFF00AA)</string>
 	
 	<string id="xtiny">Extremely tiny</string>
 	<string id="tiny">Tiny</string>
 	<string id="small">Small</string>
-	
+	<string id="medium">Medium</string>
+		
 </strings>

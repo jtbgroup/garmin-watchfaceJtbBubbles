@@ -1,17 +1,19 @@
 <properties> 
 	<property id="PROP_COLOR_BACKGROUND" type="number">3</property> 
 	<property id="PROP_COLOR_CLOCK_HOUR" type="number">4</property> 
-	<property id="PROP_COLOR_CLOCK_MINUTE" type="number">7</property> 
+	<property id="PROP_COLOR_CLOCK_MINUTE" type="number">6</property> 
 	<property id="PROP_COLOR_CLOCK_SECOND" type="number">0</property> 
-	<property id="PROP_COLOR_DATE" type="number">8</property> 
+	<property id="PROP_COLOR_CLOCK_TEXT_HOUR" type="number">0</property> 
+	<property id="PROP_COLOR_CLOCK_TEXT_MINUTE" type="number">0</property> 
+	<property id="PROP_COLOR_DATE" type="number">1</property> 
 	<property id="PROP_COLOR_BUBBLE_BORDER" type="number">1</property> 
 	<property id="PROP_ICON_COLOR_BLUETOOTH" type="number">10</property> 
 	<property id="PROP_ICON_COLOR_ALARM" type="number">7</property> 
-	<property id="PROP_ICON_COLOR_NOTIFICATION" type="number">12</property> 
+	<property id="PROP_ICON_COLOR_NOTIFICATION" type="number">8</property> 
 	<property id="PROP_HOUR_MODE" type="number">0</property>
 	<property id="PROP_DATE_FORMAT" type="number">0</property>
 	<property id="PROP_FONT_SIZE_DATE" type="number">0</property> 
-	<property id="PROP_FONT_SIZE_CLOCK_HOUR" type="number">2</property> 
+	<property id="PROP_FONT_SIZE_CLOCK_HOUR" type="number">3</property> 
 	<property id="PROP_FONT_SIZE_CLOCK_MINUTE" type="number">1</property> 
 	<property id="PROP_SHOW_BATTERY" type="boolean">true</property> 
 	<property id="PROP_SHOW_NOTIFICATION" type="boolean">true</property>
@@ -21,10 +23,10 @@
 	<property id="PROP_SHOW_ORBIT_HOUR" type="boolean">true</property> 
 	<property id="PROP_SHOW_ORBIT_MINUTE" type="boolean">true</property> 
 	<property id="PROP_SHOW_ORBIT_SECOND" type="boolean">false</property> 
-	<property id="PROP_ORBIT_DISTANCE_HOUR" type="number">35</property> 
+	<property id="PROP_ORBIT_DISTANCE_HOUR" type="number">38</property> 
 	<property id="PROP_ORBIT_DISTANCE_MINUTE" type="number">85</property> 
 	<property id="PROP_ORBIT_DISTANCE_SECOND" type="number">70</property> 
-	<property id="PROP_ORBIT_WIDTH_HOUR" type="number">3</property> 
+	<property id="PROP_ORBIT_WIDTH_HOUR" type="number">1</property> 
 	<property id="PROP_ORBIT_WIDTH_MINUTE" type="number">2</property> 
 	<property id="PROP_ORBIT_WIDTH_SECOND" type="number">1</property> 
 	
