@@ -2,6 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System;
 using Toybox.Lang;
+using Toybox.System as Sys;
 using Toybox.Time.Gregorian as Calendar;
 using JTBUtils as Utils;
 using BubblesConstants as Cst;
@@ -221,15 +222,19 @@ class BubblesView extends Ui.WatchFace {
         // Get and show the current time
         var clockTime = System.getClockTime();
         // var timeString = Lang.format("$1$:$2$", [clockTime.hour, clockTime.min.format("%02d")]);
+		var minute = clockTime.min;
 		
-		displayMinutes(dc, clockTime.min);    
-				
+		//HOUR
 		var hour = clockTime.hour;
 		if(hourMode == Cst.OPTION_HOUR_MODE_12 && hour > 12){
 			hour = hour - 12;
 		}
-		displayHour(dc, hour); 
+		displayHour(dc, hour, minute); 
 
+		//MINUTES
+		displayMinutes(dc, minute);    
+
+		//SECONDS
 		if(!sleeping){
 			displaySeconds(dc, clockTime.sec);
 		}
@@ -259,8 +264,10 @@ class BubblesView extends Ui.WatchFace {
 //		dc.drawText(coordX, coordY-fontH/2, FONT_HOUR, hour.format("%02d"), Gfx.TEXT_JUSTIFY_CENTER);
     }  
     
-    function displayHour(dc, hour){
-		var coord= getXY(hour*angleHour, orbitDistanceHour);
+    function displayHour(dc, hour, minute){
+    	var angle = (hour*angleHour) + (angleHour * (minute * 1.0/60) );
+    	Sys.println(hour*angleHour + " > " + angleHour * (minute *1.0/60) +" > "  + angle);
+		var coord= getXY(angle, orbitDistanceHour);
     	var coordX = coord[0];
     	var coordY = coord[1];
 		
