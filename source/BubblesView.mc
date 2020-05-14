@@ -266,7 +266,7 @@ class BubblesView extends Ui.WatchFace {
     
     function displayHour(dc, hour, minute){
     	var angle = (hour*angleHour) + (angleHour * (minute * 1.0/60) );
-    	Sys.println(hour*angleHour + " > " + angleHour * (minute *1.0/60) +" > "  + angle);
+    	//Sys.println(hour*angleHour + " > " + angleHour * (minute *1.0/60) +" > "  + angle);
 		var coord= getXY(angle, orbitDistanceHour);
     	var coordX = coord[0];
     	var coordY = coord[1];
